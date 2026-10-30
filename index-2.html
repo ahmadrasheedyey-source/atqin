@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b6b3a"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<title>أتقن القرآن</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;700&display=swap">
+<style>
+:root{--g:#0b6b3a;--g2:#e8f3ec;--au:#b8923a;--t:#1d2b24;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--t);font:17px/1.6 Tajawal,Tahoma,sans-serif}
+#app{max-width:640px;margin:0 auto;padding:16px}
+h1,h2{font-family:Amiri,serif;color:var(--g);margin:.3em 0}
+.hero{text-align:center;padding:28px 12px;border:2px solid var(--au);border-radius:18px;outline:1px solid var(--au);outline-offset:-8px;background:#141414}
+.hero h1{font-size:44px;margin:0;color:#fff}.hero p{margin:6px 0;color:var(--au);font-family:Amiri,serif;font-size:20px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.tile{border:1.5px solid var(--au);border-radius:14px;background:#fff;color:#111;padding:20px 8px;font:700 18px Tajawal,sans-serif;cursor:pointer}
+.tile:active{background:var(--g2)}
+.btn{background:var(--g);color:#fff;border:0;border-radius:12px;padding:12px 18px;font:700 16px Tajawal,sans-serif;cursor:pointer}
+.btn.o{background:#fff;color:var(--g);border:1.5px solid var(--g)}
+.btn.d{background:#fff;color:#9b2c2c;border:1.5px solid #9b2c2c}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+input,select{width:100%;padding:11px;border:1.5px solid #cfd9d3;border-radius:10px;font:16px Tajawal,sans-serif;margin:4px 0 10px}
+label{font-weight:700;color:var(--g)}
+.top{display:flex;align-items:center;gap:10px;border-bottom:2px solid var(--au);padding-bottom:8px;margin-bottom:12px}
+.top h2{margin:0;flex:1}
+.q{font-family:Amiri,serif;line-height:2.1;text-align:justify}
+.q .a{cursor:pointer;border-radius:6px}.q .a.b{background:#fff3cf}.q .a.m{color:var(--g)}
+.n{color:var(--au);font-size:.7em;margin:0 3px}
+.li{display:flex;justify-content:space-between;align-items:center;border:1px solid #dfe7e2;border-radius:10px;padding:10px 14px;margin:6px 0;cursor:pointer}
+.li small{color:var(--au)}
+.big{font:36px/2.2 Amiri,serif;text-align:center;border:1.5px solid var(--au);border-radius:14px;padding:12px;margin:12px 0}
+.bar{height:10px;background:var(--g2);border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--g)}
+.note{background:var(--g2);border-radius:10px;padding:12px;font-size:15px}
+audio{width:100%;margin:6px 0}
+</style></head><body><div id="app"></div>
+<script>
+const N="الفاتحة,البقرة,آل عمران,النساء,المائدة,الأنعام,الأعراف,الأنفال,التوبة,يونس,هود,يوسف,الرعد,إبراهيم,الحجر,النحل,الإسراء,الكهف,مريم,طه,الأنبياء,الحج,المؤمنون,النور,الفرقان,الشعراء,النمل,القصص,العنكبوت,الروم,لقمان,السجدة,الأحزاب,سبأ,فاطر,يس,الصافات,ص,الزمر,غافر,فصلت,الشورى,الزخرف,الدخان,الجاثية,الأحقاف,محمد,الفتح,الحجرات,ق,الذاريات,الطور,النجم,القمر,الرحمن,الواقعة,الحديد,المجادلة,الحشر,الممتحنة,الصف,الجمعة,المنافقون,التغابن,الطلاق,التحريم,الملك,القلم,الحاقة,المعارج,نوح,الجن,المزمل,المدثر,القيامة,الإنسان,المرسلات,النبأ,النازعات,عبس,التكوير,الانفطار,المطففين,الانشقاق,البروج,الطارق,الأعلى,الغاشية,الفجر,البلد,الشمس,الليل,الضحى,الشرح,التين,العلق,القدر,البينة,الزلزلة,العاديات,القارعة,التكاثر,العصر,الهمزة,الفيل,قريش,الماعون,الكوثر,الكافرون,النصر,المسد,الإخلاص,الفلق,الناس".split(",");
+const T={
+ar:{app:"أتقن القرآن",tag:"اقرأ، استمع، احفظ، وأتقن تلاوتك.",bis:"بسم الله الرحمن الرحيم",name:"الاسم",age:"العمر",goal:"هدفك",g:["قراءة القرآن","حفظ القرآن","تعلّم التجويد","جميع ما سبق"],start:"ابدأ",quran:"القرآن الكريم",listen:"الاستماع",hifz:"الحفظ والمراجعة",quiz:"الاختبارات",tajweed:"التجويد",recs:"تلاواتي",tafsir:"المعاني والتفسير",settings:"الملف والإعدادات",back:"رجوع",imp:"استيراد نص المصحف",impH:"اختر ملف المصحف الموثّق (Tanzil، نص عادي: quran-uthmani.txt). يُحفظ على جهازك ويعمل دون إنترنت.",need:"استورد نص المصحف أولاً من الإعدادات.",rec:"سجّل",stop:"إيقاف",mem:"حفظت الآية",next:"التالية",prev:"السابقة",show:"أظهر الإجابة",again:"التالي",soon:"هذا القسم قادم في الإصدار التالي.",lang:"اللغة",font:"حجم الخط",stats:"الآيات المحفوظة",del:"حذف",ren:"تسمية",none:"لا توجد تسجيلات بعد.",sv:"احفظ في تلاواتي",ok:"تم الاستيراد",bad:"الملف غير صالح. المطلوب صيغة: رقم السورة|رقم الآية|النص",steps:"استمع للقارئ، اقرأ الآية بصوتك، كرّر، ثم سجّل وقارن.",qh:"أكمل الآية بصوتك قبل إظهار الإجابة.",save:"حفظ",mic:"تعذّر تشغيل الميكروفون. اسمح به في المتصفح.",ayah:"آية"},
+en:{app:"Atqin Al-Quran",tag:"Read, listen, memorize, perfect your recitation.",bis:"بسم الله الرحمن الرحيم",name:"Name",age:"Age",goal:"Your goal",g:["Read the Quran","Memorize the Quran","Learn Tajweed","All of the above"],start:"Start",quran:"The Holy Quran",listen:"Listen",hifz:"Memorize & Review",quiz:"Quizzes",tajweed:"Tajweed",recs:"My Recitations",tafsir:"Meanings & Tafsir",settings:"Profile & Settings",back:"Back",imp:"Import Quran text",impH:"Choose the verified Quran file (Tanzil plain text: quran-uthmani.txt). It is stored on your device and works offline.",need:"Import the Quran text first from Settings.",rec:"Record",stop:"Stop",mem:"I memorized it",next:"Next",prev:"Previous",show:"Show answer",again:"Next",soon:"This section comes in the next version.",lang:"Language",font:"Font size",stats:"Memorized ayahs",del:"Delete",ren:"Rename",none:"No recordings yet.",sv:"Save to My Recitations",ok:"Imported",bad:"Invalid file. Expected: surah|ayah|text",steps:"Listen to a reciter, read the ayah aloud, repeat, then record and compare.",qh:"Recite the rest aloud before showing the answer.",save:"Save",mic:"Microphone unavailable. Allow it in your browser.",ayah:"Ayah"},
+fr:{app:"Atqin Al-Quran",tag:"Lisez, écoutez, mémorisez, perfectionnez votre récitation.",bis:"بسم الله الرحمن الرحيم",name:"Nom",age:"Âge",goal:"Votre objectif",g:["Lire le Coran","Mémoriser le Coran","Apprendre le Tajwid","Tout ce qui précède"],start:"Commencer",quran:"Le Saint Coran",listen:"Écoute",hifz:"Mémorisation et révision",quiz:"Quiz",tajweed:"Tajwid",recs:"Mes récitations",tafsir:"Sens et Tafsir",settings:"Profil et réglages",back:"Retour",imp:"Importer le texte du Coran",impH:"Choisissez le fichier vérifié (Tanzil, texte brut : quran-uthmani.txt). Il reste sur votre appareil et fonctionne hors ligne.",need:"Importez d’abord le texte du Coran dans les réglages.",rec:"Enregistrer",stop:"Arrêter",mem:"Je l’ai mémorisé",next:"Suivant",prev:"Précédent",show:"Afficher la réponse",again:"Suivant",soon:"Cette section arrive dans la prochaine version.",lang:"Langue",font:"Taille du texte",stats:"Versets mémorisés",del:"Supprimer",ren:"Renommer",none:"Aucun enregistrement.",sv:"Ajouter à Mes récitations",ok:"Importé",bad:"Fichier invalide. Attendu : sourate|verset|texte",steps:"Écoutez un récitant, lisez le verset à voix haute, répétez, puis enregistrez et comparez.",qh:"Récitez la suite à voix haute avant d’afficher la réponse.",save:"Enregistrer",mic:"Micro indisponible. Autorisez-le dans le navigateur.",ayah:"Verset"}};
+let S={lang:"ar",font:30,done:{},bm:{},name:"",age:"",goal:0,last:1};
+try{Object.assign(S,JSON.parse(localStorage.getItem("atq")||"{}"))}catch(e){}
+const sv=()=>{try{localStorage.setItem("atq",JSON.stringify(S))}catch(e){}};
+const t=k=>T[S.lang][k];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const db=new Promise((r,j)=>{const q=indexedDB.open("atq",1);q.onupgradeneeded=()=>{q.result.createObjectStore("kv");q.result.createObjectStore("rec",{keyPath:"id"})};q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)});
+const io=async(st,m,...a)=>{const d=await db;return new Promise((r,j)=>{const q=d.transaction(st,/^get/.test(m)?"readonly":"readwrite").objectStore(st)[m](...a);q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)})};
+let Q=null,V="welcome",P=[],H=null,MR=null,blob=null,QZ=null,QS=false;
+const $=document.getElementById("app");
+const done=()=>Object.keys(S.done).length;
+function go(v,...p){V=v;P=p;H=null;blob=null;QS=false;if(v=="quiz")QZ=null;draw();scrollTo(0,0)}
+const hdr=(title,back="home")=>`<div class="top"><button class="btn o" onclick="go('${back}')">${t("back")}</button><h2>${title}</h2></div>`;
+const need=()=>`<div class="note">${t("need")}</div><div class="row"><button class="btn" onclick="go('settings')">${t("settings")}</button></div>`;
+function draw(){
+ document.documentElement.lang=S.lang;document.documentElement.dir=S.lang=="ar"?"rtl":"ltr";
+ let h="";
+ if(V=="welcome"&&S.name){V="home"}
+ if(V=="welcome"){
+  h=`<div class="hero"><h1>${t("app")}</h1><p>${t("bis")}</p><p>${t("tag")}</p></div>
+  <div class="row">${["ar","en","fr"].map(l=>`<button class="btn ${S.lang==l?"":"o"}" onclick="S.lang='${l}';sv();draw()">${{ar:"العربية",en:"English",fr:"Français"}[l]}</button>`).join("")}</div>
+  <label>${t("name")}</label><input id="nm"><label>${t("age")}</label><input id="ag" type="number" min="3" max="99">
+  <label>${t("goal")}</label><select id="gl">${t("g").map((x,i)=>`<option value="${i}">${x}</option>`).join("")}</select>
+  <button class="btn" onclick="S.name=nm.value.trim()||'—';S.age=ag.value;S.goal=+gl.value;sv();go('home')">${t("start")}</button>`;
+ }else if(V=="home"){
+  const k=[["quran","quran"],["listen","listen"],["hifz","hifz"],["quiz","quiz"],["tajweed","tajweed"],["recs","recs"],["tafsir","tafsir"],["settings","settings"]];
+  h=`<div class="hero"><h1>${t("app")}</h1><p>${t("bis")}</p></div><div class="grid">${k.map(([a,b])=>`<button class="tile" onclick="go('${b}')">${t(a)}</button>`).join("")}</div>`;
+ }else if(V=="listen"){h=listenUI()}else if(V=="tajweed"){h=tjUI()}else if(V=="tafsir"){h=tafsirUI()}else if(V=="soon"){
+  h=hdr(t(V=="listen"?"listen":"tajweed"))+`<div class="note">${t("soon")}</div>`;
+ }else if(V=="quran"){
+  h=hdr(t("quran"))+(Q?N.map((n,i)=>`<div class="li" onclick="S.last=${i+1};go('read',${i+1})"><span>${i+1}. ${n}</span><small>${Q[i+1]?Q[i+1].length:0} ${t("ayah")}</small></div>`).join(""):need());
+ }else if(V=="read"){
+  const s=P[0];
+  h=hdr(`${s}. ${N[s-1]}`,"quran")+`<div class="q" style="font-size:${S.font}px">${(s!=1&&s!=9?`<div style="text-align:center">${esc(Q[1][0])}</div>`:"")}${Q[s].map((x,i)=>`<span class="a ${S.bm[s+":"+(i+1)]?"b":""} ${S.done[s+":"+(i+1)]?"m":""}" onclick="bm(${s},${i+1})">${esc(x)}<span class="n">﴿${i+1}﴾</span></span>`).join(" ")}</div>
+  <div class="row">${s>1?`<button class="btn o" onclick="go('read',${s-1})">${t("prev")}</button>`:""}${s<114?`<button class="btn" onclick="go('read',${s+1})">${t("next")}</button>`:""}</div>`;
+ }else if(V=="hifz"){
+  if(!Q){h=hdr(t("hifz"))+need()}
+  else if(!P[0]){h=hdr(t("hifz"))+N.map((n,i)=>`<div class="li" onclick="go('hifz',${i+1})"><span>${i+1}. ${n}</span><small>${Object.keys(S.done).filter(k=>k.split(":")[0]==i+1).length}/${Q[i+1].length}</small></div>`).join("")}
+  else{
+   const s=P[0],a=P[1]||(Q[s].findIndex((_,i)=>!S.done[s+":"+(i+1)])+1)||1,tot=Q[s].length,dn=Object.keys(S.done).filter(k=>k.split(":")[0]==s).length;
+   H={s,a};
+   h=hdr(`${N[s-1]} · ${a}/${tot}`,"hifz")+`<div class="bar"><i style="width:${dn/tot*100}%"></i></div><div class="big">${esc(Q[s][a-1])}</div>
+   <div class="note">${t("steps")}</div>
+   <div class="row"><button class="btn o" id="rb" onclick="rec()">${t("rec")}</button></div><div id="pb">${blob?pbHtml():""}</div>
+   <div class="row"><button class="btn" onclick="S.done['${s}:${a}']=1;sv();go('hifz',${s},${Math.min(a+1,tot)})">${t("mem")}</button>
+   ${a>1?`<button class="btn o" onclick="go('hifz',${s},${a-1})">${t("prev")}</button>`:""}${a<tot?`<button class="btn o" onclick="go('hifz',${s},${a+1})">${t("next")}</button>`:""}</div>`;
+  }
+ }else if(V=="quiz"){
+  if(!Q){h=hdr(t("quiz"))+need()}
+  else{
+   if(!QZ){const pool=Object.keys(S.done);let s,a;for(let i=0;i<50;i++){const k=pool.length?pool[Math.random()*pool.length|0].split(":"):[1+(Math.random()*114|0),0];s=+k[0];a=k[1]?+k[1]:1+(Math.random()*Q[s].length|0);const w=Q[s][a-1].split(" ");if(w.length>=4){QZ={s,a,w};break}}}
+   const w=QZ.w,c=Math.ceil(w.length/2);
+   h=hdr(t("quiz"))+`<div class="note">${t("qh")}</div><div class="big">${esc(w.slice(0,c).join(" "))} ${QS?`<span style="color:var(--g)">${esc(w.slice(c).join(" "))}</span>`:"…"}</div><div style="text-align:center;color:var(--au)">${N[QZ.s-1]} · ${QZ.a}</div>
+   <div class="row">${QS?"":`<button class="btn" onclick="QS=true;draw()">${t("show")}</button>`}<button class="btn o" onclick="QZ=null;QS=false;draw()">${t("again")}</button></div>`;
+  }
+ }else if(V=="recs"){
+  h=hdr(t("recs"))+`<div id="rl"></div>`;
+ }else if(V=="settings"){
+  h=hdr(t("settings"))+`<label>${t("name")}</label><input value="${esc(S.name)}" onchange="S.name=this.value;sv()"><label>${t("age")}</label><input type="number" value="${esc(S.age)}" onchange="S.age=this.value;sv()">
+  <label>${t("goal")}</label><select onchange="S.goal=+this.value;sv()">${t("g").map((x,i)=>`<option value="${i}" ${S.goal==i?"selected":""}>${x}</option>`).join("")}</select>
+  <label>${t("lang")}</label><select onchange="S.lang=this.value;sv();draw()">${[["ar","العربية"],["en","English"],["fr","Français"]].map(([l,n])=>`<option value="${l}" ${S.lang==l?"selected":""}>${n}</option>`).join("")}</select>
+  <label>${t("font")}</label><input type="range" min="22" max="48" value="${S.font}" onchange="S.font=+this.value;sv()">
+  <label>${t("stats")}: ${done()} / 6236</label><div class="bar"><i style="width:${done()/6236*100}%"></i></div>
+  <button class="btn" onclick="dlQ()">${DQ[S.lang]}</button> <span id="dq"></span><p class="note">${t("impH")}</p><input type="file" accept=".txt,text/plain" onchange="imp(this.files[0])"><div id="im"></div>`;
+ }
+ $.innerHTML=h;
+ if(V=="recs")recList();if(V=="listen"){lcur();playBtn()}if(V=="tafsir")tfLoad();
+}
+function bm(s,a){const k=s+":"+a;S.bm[k]?delete S.bm[k]:S.bm[k]=1;S.last=s;sv();draw()}
+async function imp(f){
+ if(!f)return;const tx=await f.text(),q=[];
+ tx.split(/\r?\n/).forEach(l=>{if(!l||l[0]=="#")return;const p=l.split("|");if(p.length<3)return;const s=+p[0],a=+p[1];if(s>0&&a>0){(q[s]=q[s]||[])[a-1]=p.slice(2).join("|").trim()}});
+ const ok=q.length==115&&q[1]&&q[1].length==7&&q[2]&&q[2].length==286;
+ if(!ok){im.innerHTML=`<div class="note">${t("bad")}</div>`;return}
+ Q=q;await io("kv","put",q,"q");im.innerHTML=`<div class="note">${t("ok")} ✓</div>`;
+}
+function pbHtml(){return `<audio controls src="${URL.createObjectURL(blob)}"></audio><button class="btn o" onclick="saveRec()">${t("sv")}</button>`}
+async function rec(){
+ if(MR&&MR.state=="recording"){MR.stop();return}
+ try{
+  const st=await navigator.mediaDevices.getUserMedia({audio:true});MR=new MediaRecorder(st);const ch=[];
+  MR.ondataavailable=e=>ch.push(e.data);
+  MR.onstop=()=>{blob=new Blob(ch,{type:MR.mimeType});st.getTracks().forEach(x=>x.stop());rb.textContent=t("rec");pb.innerHTML=pbHtml()};
+  MR.start();rb.textContent=t("stop");
+ }catch(e){alert(t("mic"))}
+}
+async function saveRec(){
+ if(!blob||!H)return;
+ await io("rec","put",{id:Date.now(),name:N[H.s-1]+" · "+H.a,s:H.s,a:H.a,blob,date:new Date().toISOString().slice(0,10)});
+ pb.innerHTML=`<div class="note">${t("save")} ✓</div>`;
+}
+async function recList(){
+ const r=(await io("rec","getAll")).sort((a,b)=>b.id-a.id);
+ document.getElementById("rl").innerHTML=r.length?r.map(x=>`<div class="li" style="display:block;cursor:default"><b>${esc(x.name)}</b> <small>${x.s?N[x.s-1]:""} · ${x.date}</small><audio controls src="${URL.createObjectURL(x.blob)}"></audio><div class="row"><button class="btn o" onclick="renRec(${x.id})">${t("ren")}</button><button class="btn d" onclick="delRec(${x.id})">${t("del")}</button></div></div>`).join(""):`<div class="note">${t("none")}</div>`;
+}
+async function renRec(id){const x=await io("rec","get",id),n=prompt(t("ren"),x.name);if(n){x.name=n;await io("rec","put",x);recList()}}
+async function delRec(id){await io("rec","delete",id);recList()}
+const R=[["Alafasy_128kbps","مشاري العفاسي"],["Abdul_Basit_Murattal_192kbps","عبد الباسط عبد الصمد"],["Maher_AlMuaiqly_128kbps","ماهر المعيقلي"],["Abdurrahmaan_As-Sudais_192kbps","عبد الرحمن السديس"],["Yasser_Ad-Dussary_128kbps","ياسر الدوسري"],["Saood_ash-Shuraym_128kbps","سعود الشريم"],["Abu_Bakr_Ash-Shaatree_128kbps","أبو بكر الشاطري"]];
+const LT={ar:{r:"القارئ",s:"السورة",rp:["بدون تكرار","تكرار الآية","تكرار السورة"],dl:"نزّل السورة للاستماع دون إنترنت",err:"تعذّر التشغيل أو التنزيل. تأكد من الاتصال ومن أن التطبيق مستضاف على موقعك.",vol:"الصوت"},en:{r:"Reciter",s:"Surah",rp:["No repeat","Repeat ayah","Repeat surah"],dl:"Download surah for offline",err:"Playback or download failed. Check your connection and that the app is hosted on your own site.",vol:"Volume"},fr:{r:"Récitant",s:"Sourate",rp:["Sans répétition","Répéter le verset","Répéter la sourate"],dl:"Télécharger la sourate hors ligne",err:"Lecture ou téléchargement impossible. Vérifiez la connexion et que l’app est hébergée sur votre site.",vol:"Volume"}};
+let L={r:0,s:1,a:1,rep:0,vol:1},AU=new Audio();
+const p3=n=>String(n).padStart(3,"0");
+const aurl=(r,s,a)=>`https://everyayah.com/data/${R[r][0]}/${p3(s)}${p3(a)}.mp3`;
+const cnt=()=>Q&&Q[L.s]?Q[L.s].length:0;
+function listenUI(){const l=LT[S.lang];return hdr(t("listen"))+`<label>${l.r}</label><select onchange="L.r=+this.value;stopA()">${R.map((x,i)=>`<option value="${i}" ${L.r==i?"selected":""}>${x[1]}</option>`).join("")}</select>
+<label>${l.s}</label><select onchange="L.s=+this.value;L.a=1;stopA();lcur()">${N.map((n,i)=>`<option value="${i+1}" ${L.s==i+1?"selected":""}>${i+1}. ${n}</option>`).join("")}</select>
+<div class="big" id="lc" style="font-size:30px;line-height:2"></div>
+<div class="row" style="justify-content:center"><button class="btn o" onclick="stepA(-1)">⏮</button><button class="btn" id="pp" onclick="tog()">▶</button><button class="btn o" onclick="stepA(1)">⏭</button></div>
+<select onchange="L.rep=+this.value">${l.rp.map((x,i)=>`<option value="${i}" ${L.rep==i?"selected":""}>${x}</option>`).join("")}</select>
+<label>${l.vol}</label><input type="range" min="0" max="1" step="0.05" value="${L.vol}" oninput="L.vol=+this.value;AU.volume=L.vol">
+<button class="btn o" onclick="dlS()">${l.dl}</button> <span id="dlp"></span>${Q?"":`<div class="note" style="margin-top:12px">${t("need")}</div>`}`}
+function lcur(){const e=document.getElementById("lc");if(e)e.innerHTML=(Q&&Q[L.s]?esc(Q[L.s][L.a-1]||""):"")+`<div style="font-size:16px;color:var(--au)">${N[L.s-1]} · ${L.a}</div>`}
+function playBtn(){const b=document.getElementById("pp");if(b)b.textContent=AU.paused?"▶":"⏸"}
+function stopA(){AU.pause();AU.removeAttribute("src");AU.load();playBtn()}
+async function playA(){let u=aurl(L.r,L.s,L.a);try{const b=await io("kv","get",`au:${L.r}:${L.s}:${L.a}`);if(b)u=URL.createObjectURL(b)}catch(e){}AU.src=u;AU.volume=L.vol;try{await AU.play()}catch(e){}playBtn();lcur()}
+function tog(){if(AU.paused){AU.getAttribute("src")?AU.play():playA()}else AU.pause();playBtn()}
+function stepA(d){const n=L.a+d,c=cnt()||999;if(n<1||n>c)return;L.a=n;playA()}
+AU.onplay=AU.onpause=playBtn;
+AU.onended=()=>{const c=cnt();if(!c){playBtn();return}if(L.rep==1)playA();else if(L.a<c){L.a++;playA()}else if(L.rep==2){L.a=1;playA()}else playBtn()};
+AU.onerror=()=>{if(AU.getAttribute("src"))alert(LT[S.lang].err);playBtn()};
+async function dlS(){const c=cnt(),e=document.getElementById("dlp");if(!c){alert(t("need"));return}try{for(let a=1;a<=c;a++){const k=`au:${L.r}:${L.s}:${a}`;if(!(await io("kv","get",k))){const r=await fetch(aurl(L.r,L.s,a));if(!r.ok)throw 0;await io("kv","put",await r.blob(),k)}e.textContent=a+"/"+c}e.textContent="✓ "+c+"/"+c}catch(x){e.textContent=LT[S.lang].err}}
+
+const TJ=[["أحكام النون الساكنة والتنوين", "لهما أربعة أحكام: الإظهار، والإدغام، والإقلاب، والإخفاء. النون الساكنة تأتي في الاسم والفعل والحرف، أما التنوين فيكون في آخر الاسم فقط. والحكم يُعرف من الحرف الذي يأتي بعدهما."], ["الإظهار الحلقي", "إذا جاء بعد النون الساكنة أو التنوين أحد حروف الحلق الستة (ء ه ع ح غ خ) نُطقا بوضوح من غير غنة ولا إدغام."], ["الإدغام", "حروفه ستة مجموعة في كلمة «يرملون» (ي ر م ل و ن).<br>• بغنة: ي ن م و (تجمعها «ينمو»).<br>• بلا غنة: اللام والراء.<br>ويُشترط أن يكون الحرفان في كلمتين مختلفتين."], ["الإقلاب", "حرفه الباء فقط. إذا جاءت الباء بعد النون الساكنة أو التنوين قُلبت النون ميماً مخفاة مع غنة."], ["الإخفاء", "حروفه خمسة عشر: ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك. يُنطق فيه بالنون أو التنوين بين الإظهار والإدغام، مع غنة."], ["أحكام الميم الساكنة", "ثلاثة أحكام:<br>• إخفاء شفوي: عند الباء.<br>• إدغام مثلين صغير: عند الميم.<br>• إظهار شفوي: عند باقي الحروف."], ["المدود", "• المد الطبيعي: حركتان.<br>• المد المتصل: الهمزة بعد حرف المد في كلمة واحدة، وهو واجب (4 إلى 5 حركات).<br>• المد المنفصل: الهمزة في كلمة بعد حرف المد في كلمة قبلها، وهو جائز (2 إلى 5 حركات).<br>• المد اللازم: السكون الأصلي بعد حرف المد، ويُمد 6 حركات.<br>• المد العارض للسكون: عند الوقف."], ["مخارج الحروف", "خمسة مواضع عامة: الجوف (حروف المد)، والحلق، واللسان، والشفتان، والخيشوم (للغنة). يُتقن النطق بسماع المعلّم وتقليده."], ["صفات الحروف", "من أهمها:<br>• حروف الاستعلاء (تُفخَّم): خ ص ض غ ط ق ظ.<br>• حروف القلقلة: ق ط ب ج د.<br>تُعرف الصفات بالتدرّب والاستماع إلى القارئ."], ["أحكام الراء", "تُفخَّم الراء إذا كانت مفتوحة أو مضمومة، وتُرقَّق إذا كانت مكسورة. وللراء الساكنة أحكام تتبع ما قبلها وما بعدها، يوضحها المعلّم."], ["أحكام اللام", "• لام لفظ الجلالة: تُفخَّم بعد فتح أو ضم، وتُرقَّق بعد كسر.<br>• اللام الشمسية: تُدغم في الحرف بعدها.<br>• اللام القمرية: تُظهر."]];
+function tjUI(){const i=P[0];if(i==null)return hdr(t("tajweed"))+TJ.map((x,k)=>`<div class="li" onclick="go('tajweed',${k})"><span>${k+1}. ${x[0]}</span></div>`).join("")+`<div class="note">ملخصات تعليمية مبسّطة. راجعها مع معلّم تجويد، ولا تعتمد على التطبيق وحده للحكم على تلاوتك.</div>`;
+return hdr(TJ[i][0],"tajweed")+`<div style="font-size:19px;line-height:2.1">${TJ[i][1]}</div><div class="note" style="margin-top:12px">تدريب: افتح المصحف واقرأ آية فيها هذا الحكم بصوت مرتفع، ثم سجّل تلاوتك في «تلاواتي» وقارنها بالقارئ.</div><div class="row"><button class="btn" onclick="go('recs')">${t("recs")}</button>${i<TJ.length-1?`<button class="btn o" onclick="go('tajweed',${i+1})">${t("next")}</button>`:""}</div>`}
+const DQ={ar:"تنزيل المصحف تلقائياً",en:"Download the Quran automatically",fr:"Télécharger le Coran automatiquement"};
+async function getEd(ed){const r=await fetch("https://api.alquran.cloud/v1/quran/"+ed);if(!r.ok)throw 0;const j=await r.json(),q=[];j.data.surahs.forEach(s=>{q[s.number]=s.ayahs.map(a=>a.text)});return q}
+async function dlQ(){const e=document.getElementById("dq");e.textContent="…";try{const q=await getEd("quran-uthmani"),b=q[1][0];for(let s=2;s<=114;s++){if(s!=9&&q[s][0].startsWith(b))q[s][0]=q[s][0].slice(b.length).trim()}
+if(!(q.length==115&&q[1].length==7&&q[2].length==286))throw 0;Q=q;await io("kv","put",q,"q");e.textContent=t("ok")+" ✓"}catch(x){e.textContent=LT[S.lang].err}}
+let TF={s:1,a:1,ed:"ar.muyassar"};
+const EDS=[["ar.muyassar","التفسير الميسر"],["en.sahih","English (Sahih International)"],["fr.hamidullah","Français (Hamidullah)"]];
+async function getTx(ed){let d=await io("kv","get","tx:"+ed);if(!d){d=await getEd(ed);await io("kv","put",d,"tx:"+ed)}return d}
+function tafsirUI(){if(!Q)return hdr(t("tafsir"))+need();return hdr(t("tafsir"))+`<select onchange="TF.ed=this.value;tfLoad()">${EDS.map(x=>`<option value="${x[0]}" ${TF.ed==x[0]?"selected":""}>${x[1]}</option>`).join("")}</select>
+<select onchange="TF.s=+this.value;TF.a=1;draw()">${N.map((n,i)=>`<option value="${i+1}" ${TF.s==i+1?"selected":""}>${i+1}. ${n}</option>`).join("")}</select>
+<select onchange="TF.a=+this.value;tfLoad()">${Q[TF.s].map((_,i)=>`<option value="${i+1}" ${TF.a==i+1?"selected":""}>${t("ayah")} ${i+1}</option>`).join("")}</select><div id="tx" style="margin-top:8px"></div>`}
+async function tfLoad(){const e=document.getElementById("tx");if(!e||!Q)return;e.textContent="…";try{const d=await getTx(TF.ed);e.innerHTML=`<div class="q" style="font-size:${S.font}px;text-align:center">${esc(Q[TF.s][TF.a-1])}</div><hr><div style="font-size:19px;line-height:2" dir="${TF.ed.startsWith("ar")?"rtl":"ltr"}">${esc(d[TF.s][TF.a-1])}</div>`}catch(x){e.textContent=LT[S.lang].err}}
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+(async()=>{try{Q=await io("kv","get","q")||null}catch(e){}draw()})();
+</script></body></html>
