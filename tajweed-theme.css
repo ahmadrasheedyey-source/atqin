@@ -1,0 +1,188 @@
+/*
+ * Design system — «أتقن القرآن»
+ * Calm Islamic palette: deep emerald, warm ivory, burnished gold.
+ * All colors use oklch.
+ */
+
+@theme inline {
+  --font-sans: "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-display: "Reem Kufi", "IBM Plex Sans Arabic", sans-serif;
+  --font-quran: "Amiri Quran", "Amiri", serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-deep: var(--primary-deep);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-foreground: var(--gold-foreground);
+  --color-ivory: var(--ivory);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  /* Tajweed rule colors (traditional mushaf conventions) */
+  --color-tj-madd: var(--tj-madd);
+  --color-tj-madd-lazim: var(--tj-madd-lazim);
+  --color-tj-madd-wajib: var(--tj-madd-wajib);
+  --color-tj-ghunnah: var(--tj-ghunnah);
+  --color-tj-ikhfa: var(--tj-ikhfa);
+  --color-tj-idgham: var(--tj-idgham);
+  --color-tj-iqlab: var(--tj-iqlab);
+  --color-tj-qalqalah: var(--tj-qalqalah);
+  --color-tj-silent: var(--tj-silent);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 1rem;
+  --background: oklch(0.975 0.012 95);
+  --foreground: oklch(0.25 0.045 165);
+  --card: oklch(0.995 0.005 95);
+  --card-foreground: oklch(0.25 0.045 165);
+  --popover: oklch(0.995 0.005 95);
+  --popover-foreground: oklch(0.25 0.045 165);
+  --primary: oklch(0.45 0.09 163);
+  --primary-foreground: oklch(0.985 0.01 95);
+  --primary-deep: oklch(0.3 0.065 165);
+  --secondary: oklch(0.94 0.03 160);
+  --secondary-foreground: oklch(0.3 0.065 165);
+  --muted: oklch(0.945 0.015 95);
+  --muted-foreground: oklch(0.5 0.03 165);
+  --accent: oklch(0.93 0.05 88);
+  --accent-foreground: oklch(0.35 0.06 75);
+  --gold: oklch(0.74 0.12 82);
+  --gold-soft: oklch(0.92 0.06 88);
+  --gold-foreground: oklch(0.28 0.05 70);
+  --ivory: oklch(0.985 0.012 95);
+  --success: oklch(0.55 0.13 155);
+  --success-soft: oklch(0.94 0.05 155);
+  --warning: oklch(0.62 0.14 65);
+  --warning-soft: oklch(0.95 0.05 80);
+  --destructive: oklch(0.55 0.19 27);
+  --destructive-foreground: oklch(0.985 0.01 95);
+  --border: oklch(0.89 0.03 120);
+  --input: oklch(0.89 0.03 120);
+  --ring: oklch(0.74 0.12 82);
+
+  --tj-madd: oklch(0.6 0.17 25);
+  --tj-madd-lazim: oklch(0.45 0.19 25);
+  --tj-madd-wajib: oklch(0.52 0.2 15);
+  --tj-ghunnah: oklch(0.6 0.16 50);
+  --tj-ikhfa: oklch(0.5 0.15 300);
+  --tj-idgham: oklch(0.55 0.13 150);
+  --tj-iqlab: oklch(0.55 0.13 230);
+  --tj-qalqalah: oklch(0.55 0.15 245);
+  --tj-silent: oklch(0.65 0.01 165);
+
+  --gradient-hero: linear-gradient(160deg, var(--primary-deep), var(--primary));
+  --gradient-gold: linear-gradient(135deg, oklch(0.8 0.12 85), oklch(0.68 0.13 75));
+  --shadow-soft: 0 10px 30px -14px color-mix(in oklab, var(--primary-deep) 35%, transparent);
+  --shadow-gold: 0 10px 26px -12px color-mix(in oklab, var(--gold) 70%, transparent);
+  --pattern-star: radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--gold) 22%, transparent) 1.5px, transparent 2px);
+
+  --chart-1: oklch(0.45 0.09 163);
+  --chart-2: oklch(0.74 0.12 82);
+  --chart-3: oklch(0.6 0.17 25);
+  --chart-4: oklch(0.55 0.15 245);
+  --chart-5: oklch(0.5 0.15 300);
+  --sidebar: oklch(0.975 0.012 95);
+  --sidebar-foreground: oklch(0.25 0.045 165);
+  --sidebar-primary: oklch(0.45 0.09 163);
+  --sidebar-primary-foreground: oklch(0.985 0.01 95);
+  --sidebar-accent: oklch(0.94 0.03 160);
+  --sidebar-accent-foreground: oklch(0.3 0.065 165);
+  --sidebar-border: oklch(0.89 0.03 120);
+  --sidebar-ring: oklch(0.74 0.12 82);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+}
+
+@utility bg-hero {
+  background-image: var(--gradient-hero);
+}
+
+@utility bg-gold-gradient {
+  background-image: var(--gradient-gold);
+}
+
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+@utility shadow-gold {
+  box-shadow: var(--shadow-gold);
+}
+
+@utility bg-star-pattern {
+  background-image: var(--pattern-star);
+  background-size: 22px 22px;
+}
+
+@utility quran-text {
+  font-family: var(--font-quran);
+  line-height: 2.4;
+  word-spacing: 0.08em;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--destructive) 55%, transparent); }
+  70% { box-shadow: 0 0 0 18px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+@utility animate-pulse-ring {
+  animation: pulse-ring 1.6s ease-out infinite;
+}
